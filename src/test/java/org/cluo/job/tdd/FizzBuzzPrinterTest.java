@@ -58,11 +58,18 @@ public class FizzBuzzPrinterTest {
    }
    
    @Test
-   public void print_number3replacedByFizz_InNumbers1To3() throws Exception {
+   public void print_number3replacedByLucky_InNumbers1To3() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 3);
         assertThat("Output should not contain 3",numbers, not(hasItem("3")));
-        assertThat("Output should contain fizz",numbers, hasItem("fizz"));
+        assertThat("Output should contain lucky",numbers, hasItem("lucky"));
    }
+    
+    @Test
+    public void print_number13replacedByLucky_InNumbers1To13() throws Exception {
+        final List<String> numbers = fizzBuzzPrinter.print(1, 13);
+        assertThat("Output should not contain 13", numbers, not(hasItem("13")));
+        assertThat("Output should contain lucky", numbers, hasItem("lucky"));
+    }
 
     @Test
     public void print_number5replacedByBuzz_InNumbers1To5() throws Exception {

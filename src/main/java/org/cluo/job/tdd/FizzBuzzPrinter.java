@@ -8,25 +8,44 @@ public class FizzBuzzPrinter {
     public List<String> print(int startNumber, int endNumber) {
         validateArguments(startNumber, endNumber);
         final int numberCount=endNumber - startNumber + 1;
-        final List<String> numbers = new ArrayList<String>(numberCount);
+        final List<String> items = new ArrayList<String>(numberCount);
         for (int i = 0; i < numberCount; i++) {
-            populateFizzbuzzNumberCollection(numbers, startNumber);
+            replaceNumberWithFizzbuzzOrLucky(items, startNumber);
             startNumber++;
         }
-        return numbers;
+        return items;
     }
 
-    private void populateFizzbuzzNumberCollection(final List<String> collection, final int entryItem) {
+    private void replaceNumberWithFizzbuzzOrLucky(final List<String> collection, final int entryItem) {
         if (isMultipleOf15(entryItem)){
            collection.add("fizzbuzz");
         } else if (isMultipleOf3(entryItem)){
-           collection.add("fizz");
+            if (itemContains3(entryItem)){
+                collection.add("lucky");
+            } else {
+                collection.add("fizz");
+            }
         } else if (isMultipleOf5(entryItem)) {
            collection.add("buzz");
         }
         else {
-            collection.add(String.valueOf(entryItem));
+            if (itemContains3(entryItem)){
+                collection.add("lucky");
+            } else {
+                collection.add(String.valueOf(entryItem));
+            }
         }
+    }
+
+    private boolean itemContains3(int entryItem) {
+        String entryStr = String.valueOf(entryItem);
+        char[] chars = entryStr.toCharArray();
+        for (char aChar : chars) {
+            if ('3'==aChar){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isMultipleOf5(final int entryItem) {
