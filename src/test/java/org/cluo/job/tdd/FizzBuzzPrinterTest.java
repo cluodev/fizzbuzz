@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -60,54 +61,69 @@ public class FizzBuzzPrinterTest {
    @Test
    public void print_number3replacedByLucky_InNumbers1To3() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 3);
-        assertThat("Output should not contain 3",numbers, not(hasItem("3")));
-        assertThat("Output should contain lucky",numbers, hasItem("lucky"));
+        assertThat("Output list is not expected",numbers,
+                is(Arrays.asList("1","2","lucky")));
    }
     
     @Test
     public void print_number13replacedByLucky_InNumbers1To13() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 13);
         assertThat("Output should not contain 13", numbers, not(hasItem("13")));
-        assertThat("Output should contain lucky", numbers, hasItem("lucky"));
+        //3,13
+        assertThat("Occurrences of 'lucky' is wrong", countOccurrences(numbers, "lucky"), is(2));
+    }
+
+    @Test
+    public void print_number30replacedByLucky_InNumbers1To30() throws Exception {
+        final List<String> numbers = fizzBuzzPrinter.print(1, 30);
+        assertThat("Output should not contain 30", numbers, not(hasItem("30")));
+         //3,13,23,30
+        assertThat("Occurrences of 'lucky' is wrong", countOccurrences(numbers, "lucky"), is(4));
     }
 
     @Test
     public void print_number5replacedByBuzz_InNumbers1To5() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 5);
         assertThat("Output should not contain 5", numbers, not(hasItem("5")));
-        assertThat("Output should contain buzz", numbers, hasItem("buzz"));
+        assertThat("Occurrences of 'buzz' is wrong", countOccurrences(numbers, "buzz"), is(1));
     }
-   
+
+
     @Test
     public void print_number10replacedByBuzz_InNumbers1To10() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 10);
         assertThat("Output should not contain 10", numbers, not(hasItem("10")));
-        assertThat("Output should contain buzz", numbers, hasItem("buzz"));
+        //5,10 replaced
+        assertThat("Occurrences of 'buzz' is wrong", countOccurrences(numbers, "buzz"), is(2));
     }
 
    @Test
     public void print_number6replacedByFizz_InNumbers1To6() throws Exception {
          final List<String> numbers = fizzBuzzPrinter.print(1, 6);
          assertThat("Output should not contain 6",numbers, not(hasItem("6")));
-         assertThat("Output should contain fizz",numbers, hasItem("fizz"));
+         assertThat("Occurrences of 'fizz' is wrong", countOccurrences(numbers, "fizz"), is(1));
     }
 
-   @Test
-     public void print_number9And12replacedByFizz_15replacedByBuzz_InNumbers1To15() throws Exception {
+    @Test
+    public void print_number9And12replacedByFizz_15replacedByFizzbuzz_InNumbers1To15() throws Exception {
         final List<String> numbers = fizzBuzzPrinter.print(1, 15);
         assertThat("Output should not contain 9", numbers, not(hasItem("9")));
         assertThat("Output should not contain 12", numbers, not(hasItem("12")));
-        assertThat("Output should contain fizz", numbers, hasItem("fizz"));
+        //6,9,12 replaced
+        assertThat("Occurrences of 'fizz' is wrong", countOccurrences(numbers, "fizz"), is(3));
 
         assertThat("Output should not contain 15", numbers, not(hasItem("15")));
-        assertThat("Output should contain buzz", numbers, hasItem("buzz"));
-     }
+        assertThat("Occurrences of 'fizzbuzz' is wrong", countOccurrences(numbers, "fizzbuzz"), is(1));
+    }
 
-    @Test
-    public void print_number15replacedByFizzbuzz_InNumbers1To15() throws Exception {
-        final List<String> numbers = fizzBuzzPrinter.print(1, 15);
-        assertThat("Output should not contain 15", numbers, not(hasItem("15")));
-        assertThat("Output should contain fizzbuzz", numbers, hasItem("fizzbuzz"));
+    private int countOccurrences(List<String> entries, String entryToBeCounted) {
+        int count=0;
+        for (String entry : entries) {
+            if (entryToBeCounted.equals(entry)){
+                count++;
+            }
+        }
+        return count;
     }
 
    private void expectedExceptionDetails(Class<? extends Throwable> classType, String expectedExceptionMessage){

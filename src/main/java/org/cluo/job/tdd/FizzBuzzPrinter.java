@@ -18,22 +18,22 @@ public class FizzBuzzPrinter {
 
     private void replaceNumberWithFizzbuzzOrLucky(final List<String> collection, final int entryItem) {
         if (isMultipleOf15(entryItem)){
-           collection.add("fizzbuzz");
+            replaceNumberWithLuckyOrAKeyword(collection, entryItem, "fizzbuzz");
         } else if (isMultipleOf3(entryItem)){
-            if (itemContains3(entryItem)){
-                collection.add("lucky");
-            } else {
-                collection.add("fizz");
-            }
+            replaceNumberWithLuckyOrAKeyword(collection, entryItem, "fizz");
         } else if (isMultipleOf5(entryItem)) {
            collection.add("buzz");
         }
         else {
-            if (itemContains3(entryItem)){
-                collection.add("lucky");
-            } else {
-                collection.add(String.valueOf(entryItem));
-            }
+            replaceNumberWithLuckyOrAKeyword(collection, entryItem, String.valueOf(entryItem));
+        }
+    }
+
+    private void replaceNumberWithLuckyOrAKeyword(List<String> collection, int entryItem, String keyword) {
+        if (itemContains3(entryItem)) {
+            collection.add("lucky");
+        } else {
+            collection.add(keyword);
         }
     }
 
