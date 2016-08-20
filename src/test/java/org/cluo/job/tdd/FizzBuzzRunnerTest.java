@@ -2,9 +2,7 @@ package org.cluo.job.tdd;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.hamcrest.CoreMatchers;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,8 +18,7 @@ public class FizzBuzzRunnerTest {
     private ByteArrayOutputStream output = new ByteArrayOutputStream();
     private ByteArrayOutputStream error = new ByteArrayOutputStream();
 
-    private  FizzBuzzPrinter fizzBuzzPrinter;
-    
+
     @Before
     public void setUp() throws Exception {
         originalSystemOut = System.out;
