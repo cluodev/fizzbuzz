@@ -15,4 +15,4 @@ Write some code that prints out the following for a contiguous range of numbers:
 - mvn clean install
 
 # Run
-- java -jar target/fizzbuzz-1.0-SNAPSHOT-standalone.jar 1 15
+- java -jar release/fizzbuzz-1.0-SNAPSHOT-standalone.jar 1 15
