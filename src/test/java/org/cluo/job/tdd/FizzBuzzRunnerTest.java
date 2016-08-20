@@ -1,0 +1,86 @@
+package org.cluo.job.tdd;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import org.hamcrest.CoreMatchers;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+
+public class FizzBuzzRunnerTest {
+
+    private PrintStream originalSystemOut;
+    private PrintStream originalSystemErr;
+
+    private ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private ByteArrayOutputStream error = new ByteArrayOutputStream();
+
+    private  FizzBuzzPrinter fizzBuzzPrinter;
+    
+    @Before
+    public void setUp() throws Exception {
+        originalSystemOut = System.out;
+        originalSystemErr = System.err;
+
+        System.setOut(new PrintStream(output));
+        System.setErr(new PrintStream(error));
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.close();
+        System.err.close();
+        System.setOut(originalSystemOut);
+        System.setErr(originalSystemErr);
+
+    }
+    
+    @Test
+    public void main_outputsWarning_noArguments() throws Exception {
+        final String[] arguments = new String[]{};
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", output.toString(),
+                    is("Two arguments [start] and [end] are required"));
+    }
+
+    @Test
+    public void main_outputsWarning_wrongArgumentCount() throws Exception {
+        final String[] arguments = new String[] {"1","2","5"};
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", output.toString(),
+                    is("Two arguments [start] and [end] are required"));
+    }
+    
+    @Test
+    public void main_outputsWarning_1stArgumentWrongDataType() throws Exception {
+        final String[] arguments = new String[] { "abc", "2"};
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", output.toString(),
+                    is("Argument is not of number"));
+    }
+
+    @Test
+    public void main_outputsWarning_2ndArgumentWrongDataType() throws Exception {
+        final String[] arguments = new String[] { "1", "mn" };
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", output.toString(), is("Argument is not of number"));
+    }
+
+    @Test
+    public void main_outputsExpectedFizzbuzzCollection_inNumbers1To20() throws Exception {
+        final String[] arguments = new String[] { "1", "20"};
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", output.toString(), is(buildExpectedResults()));
+    }
+
+    private String buildExpectedResults() {
+        return "1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16 17 fizz 19 buzz\n";
+    }
+
+}
