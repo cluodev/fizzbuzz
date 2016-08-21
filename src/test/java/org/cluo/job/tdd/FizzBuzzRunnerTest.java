@@ -85,6 +85,18 @@ public class FizzBuzzRunnerTest {
     }
 
     private String buildExpectedResults() {
+        return buildExpectedResultForFizzbuzzAndLucky() + buildExpectedResultForCountingWordsAndInteger();
+    }
+
+    private String buildExpectedResultForCountingWordsAndInteger() {
+        return  "fizz : 4\n" +
+                "buzz : 3\n" +
+                "fizzbuzz : 1\n" +
+                "lucky : 2\n" +
+                "integer : 10\n";
+    }
+
+    private String buildExpectedResultForFizzbuzzAndLucky() {
         return "1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz 16 17 fizz 19 buzz\n";
     }
 

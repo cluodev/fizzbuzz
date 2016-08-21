@@ -11,7 +11,8 @@ public class FizzBuzzRunner {
             try {
                 List<String> collection =
                         fizzBuzzPrinter.print(Integer.valueOf(arguments[0]), Integer.valueOf(arguments[1]));
-                printResults(collection);
+                printCollection(collection);
+                printCollectionReport(collection);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
@@ -19,7 +20,18 @@ public class FizzBuzzRunner {
 
     }
 
-    private void printResults(final List<String> collection) {
+    private void printCollectionReport(final List<String> collection) {
+         FizzBuzzReporter fizzBuzzReporter = new FizzBuzzReporter(
+              new WordCounter(collection,"fizz"),
+              new WordCounter(collection,"buzz"),
+              new WordCounter(collection,"fizzbuzz"),
+              new WordCounter(collection,"lucky"),
+              new IntegerCounter(collection)
+         );
+         System.out.print(fizzBuzzReporter.report());
+    }
+
+    private void printCollection(final List<String> collection) {
         StringBuilder resultString = new StringBuilder();
         int numberOfEntries = collection.size();
         int loop = 0;
