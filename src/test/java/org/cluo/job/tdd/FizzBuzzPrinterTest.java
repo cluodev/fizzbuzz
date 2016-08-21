@@ -112,6 +112,9 @@ public class FizzBuzzPrinterTest {
         //6,9,12 replaced
         assertThat("Occurrences of 'fizz' is wrong", countOccurrences(numbers, "fizz"), is(3));
 
+        //5,10 replaced
+        assertThat("Occurrences of 'buzz' is wrong", countOccurrences(numbers, "buzz"), is(2));
+
         assertThat("Output should not contain 15", numbers, not(hasItem("15")));
         assertThat("Occurrences of 'fizzbuzz' is wrong", countOccurrences(numbers, "fizzbuzz"), is(1));
     }

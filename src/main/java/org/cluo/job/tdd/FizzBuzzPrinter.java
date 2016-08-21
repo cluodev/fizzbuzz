@@ -5,6 +5,8 @@ import java.util.List;
 
 public class FizzBuzzPrinter {
 
+    public static final String INVALID_ARGUMENT_END_NUMBER = "Invalid end number. An end number must be greater than start number";
+
     public List<String> print(int startNumber, int endNumber) {
         validateArguments(startNumber, endNumber);
         final int numberCount=endNumber - startNumber + 1;
@@ -70,7 +72,7 @@ public class FizzBuzzPrinter {
         }
 
         if (endNumber==startNumber || endNumber<startNumber){
-            throw new IllegalArgumentException("Invalid end number. An end number must be greater than start number");
+            throw new IllegalArgumentException(INVALID_ARGUMENT_END_NUMBER);
         }
     }
 }

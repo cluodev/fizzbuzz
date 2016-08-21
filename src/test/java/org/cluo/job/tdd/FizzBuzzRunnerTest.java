@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.cluo.job.tdd.FizzBuzzPrinter.INVALID_ARGUMENT_END_NUMBER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -43,7 +44,7 @@ public class FizzBuzzRunnerTest {
         final String[] arguments = new String[]{};
         FizzBuzzRunner.main(arguments);
         assertThat("Output is not expected", output.toString(),
-                    is("Two arguments [start] and [end] are required"));
+                    is("Two arguments [start] and [end] are required\n"));
     }
 
     @Test
@@ -51,7 +52,7 @@ public class FizzBuzzRunnerTest {
         final String[] arguments = new String[] {"1","2","5"};
         FizzBuzzRunner.main(arguments);
         assertThat("Output is not expected", output.toString(),
-                    is("Two arguments [start] and [end] are required"));
+                    is("Two arguments [start] and [end] are required\n"));
     }
     
     @Test
@@ -59,14 +60,21 @@ public class FizzBuzzRunnerTest {
         final String[] arguments = new String[] { "abc", "2"};
         FizzBuzzRunner.main(arguments);
         assertThat("Output is not expected", output.toString(),
-                    is("Argument is not of number"));
+                    is("Argument is not of number\n"));
     }
 
     @Test
     public void main_outputsWarning_2ndArgumentWrongDataType() throws Exception {
         final String[] arguments = new String[] { "1", "mn" };
         FizzBuzzRunner.main(arguments);
-        assertThat("Output is not expected", output.toString(), is("Argument is not of number"));
+        assertThat("Output is not expected", output.toString(), is("Argument is not of number\n"));
+    }
+
+    @Test
+    public void main_outputsWarning_FizzbuzzPrinterThrowsException() throws Exception {
+        final String[] arguments = new String[] { "5", "2" };
+        FizzBuzzRunner.main(arguments);
+        assertThat("Output is not expected", error.toString(), is(INVALID_ARGUMENT_END_NUMBER+"\n"));
     }
 
     @Test

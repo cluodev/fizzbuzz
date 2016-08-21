@@ -8,8 +8,13 @@ public class FizzBuzzRunner {
 
     public FizzBuzzRunner(String[] arguments, FizzBuzzPrinter fizzBuzzPrinter) {
         if (areCommandArgumentsValid(arguments)) {
-            List<String> collection = fizzBuzzPrinter.print(Integer.valueOf(arguments[0]), Integer.valueOf(arguments[1]));
-            printResults(collection);
+            try {
+                List<String> collection =
+                        fizzBuzzPrinter.print(Integer.valueOf(arguments[0]), Integer.valueOf(arguments[1]));
+                printResults(collection);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
 
     }
@@ -30,10 +35,10 @@ public class FizzBuzzRunner {
 
     private boolean areCommandArgumentsValid(String[] arguments) {
         if (arguments.length == 0 || arguments.length!=2) {
-            System.out.print("Two arguments [start] and [end] are required");
+            System.out.println("Two arguments [start] and [end] are required");
             return false;
         } else if (!isNumber(arguments[0]) || !isNumber(arguments[1])) {
-            System.out.print("Argument is not of number");
+            System.out.println("Argument is not of number");
             return false;
         }
         return true;
