@@ -7,6 +7,12 @@ Write some code that prints out the following for a contiguous range of numbers:
 * 'buzz' for numbers that are multiples of 5
 * 'fizzbuzz' for numbers that are multiples of 15
 * If the number contains a three you must output the text 'lucky'. This overrides any existing behaviour
+* Produce a report at the end of the program showing how many times the following were output
+  - fizz
+  - buzz
+  - fizzbuzz
+  - lucky
+  - an integer
 
 # System requirements
 - Java 1.7
