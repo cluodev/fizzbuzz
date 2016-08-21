@@ -2,7 +2,7 @@ package org.cluo.job.tdd;
 
 import java.util.List;
 
-public class WordCounter {
+public class WordCounter implements FizzbuzzCounter {
     private List<String> wordList;
     private String wordToBeCounted;
     private int result;
@@ -24,6 +24,7 @@ public class WordCounter {
         }
     }
 
+    @Override
     public int count() {
         if (wordList.isEmpty()){
             return 0;
@@ -36,6 +37,7 @@ public class WordCounter {
         return result;
     }
 
+    @Override
     public String showResult() {
         return String.format("%s : %d", wordToBeCounted, result);
     }

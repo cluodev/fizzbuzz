@@ -1,29 +1,17 @@
 package org.cluo.job.tdd;
 
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.hamcrest.CoreMatchers;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static java.util.Collections.emptyList;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class WordCounterTest {
+public class WordCounterTest extends CounterTestSupport {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
-    @Before
-    public void beforeEachTest() throws Exception {
-
-    }
-    
     @Test
     public void constructor_throwsIllegalArgumentException_nullListIsGiven() throws Exception {
         expectedExceptionDetails(IllegalArgumentException.class, "Null word collection received");
@@ -68,16 +56,7 @@ public class WordCounterTest {
         List<String> wordList = buildAWordCollection("fizz","fizz", "lucky");
         WordCounter wordCounter = new WordCounter(wordList, "fizz");
         wordCounter.count();
-        assertThat("", wordCounter.showResult(), CoreMatchers.is("fizz : 2"));
+        assertThat("Result shown is not expected", wordCounter.showResult(), is("fizz : 2"));
     }
 
-    private List<String> buildAWordCollection(String ... word) {
-        return Arrays.asList(word);
-    }
-
-    private void expectedExceptionDetails(Class<? extends Throwable> classType, String expectedExceptionMessage) {
-        expectedException.expect(classType);
-        expectedException.expectMessage(expectedExceptionMessage);
-    }
-    
 }
