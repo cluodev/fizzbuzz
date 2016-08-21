@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class IntegerCounterTest extends CounterTestSupport {
+public class IntegerCounterTest extends FizzbuzzTestSupport {
 
     @Test
     public void constructor_throwsIllegalArgumentException_nullCollectionGiven() throws Exception {

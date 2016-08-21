@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-public class CounterTestSupport {
+public class FizzbuzzTestSupport {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 

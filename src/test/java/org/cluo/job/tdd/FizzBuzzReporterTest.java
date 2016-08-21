@@ -1,31 +1,40 @@
 package org.cluo.job.tdd;
 
-import org.junit.Before;
-import org.junit.Rule;
+import java.util.List;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-public class FizzBuzzReporterTest {
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-    private FizzBuzzReporter fizzBuzzReporter;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
-    @Before
-    public void beforeEachTest() throws Exception {
-        fizzBuzzReporter =  new FizzBuzzReporter();
-    }
+public class FizzBuzzReporterTest extends FizzbuzzTestSupport {
 
     @Test
-    public void report_throwsIllegalArgumentException_emptyListIsGiven() throws Exception {
-
+    public void report_throwsIllegalArgumentException_nullCollectionIsGiven() throws Exception {
+        expectedExceptionDetails(IllegalArgumentException.class, "At least one Fizzbuzz counter is required");
+        new FizzBuzzReporter(null);
     }
-
-
-    private void expectedExceptionDetails(Class<? extends Throwable> classType, String expectedExceptionMessage){
-       expectedException.expect(classType);
-       expectedException.expectMessage(expectedExceptionMessage);
+    
+    @Test
+    public void report_showsCorrectResultForCountingFizz_givenAFizzWordCounter() throws Exception {
+        List<String> wordCollection = buildAWordCollection("fizz","abc");
+        FizzBuzzReporter fizzBuzzReporter= new  FizzBuzzReporter(new WordCounter(wordCollection,"fizz"));
+        assertThat("Wrong result produced by Fizz word counter", fizzBuzzReporter.report(), is("fizz : 1\n"));
     }
-
+    
+    @Test
+    public void report_showsCorrectResultForCountingInteger_givenAIntegerCounter() throws Exception {
+        List<String> wordCollection = buildAWordCollection("fizz", "45","abc");
+        FizzBuzzReporter fizzBuzzReporter = new FizzBuzzReporter(new IntegerCounter(wordCollection));
+        assertThat("Number of integers is wrong", fizzBuzzReporter.report(), is("integer : 1\n"));
+    }
+    
+    @Test
+    public void report_showsCorrectResultForCountingFizzAndInteger_givenFizzAndIntegerCounter() throws Exception {
+        List<String> wordCollection = buildAWordCollection("fizz", "45", "abc");
+        FizzBuzzReporter fizzBuzzReporter = new FizzBuzzReporter(
+                                                       new IntegerCounter(wordCollection),
+                                                       new WordCounter(wordCollection,"fizz"));
+        assertThat("Report details are wrong", fizzBuzzReporter.report(), is("integer : 1\nfizz : 1\n"));
+    }
+    
 }

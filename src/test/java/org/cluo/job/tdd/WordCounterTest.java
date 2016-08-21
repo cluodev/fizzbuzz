@@ -2,7 +2,6 @@ package org.cluo.job.tdd;
 
 import java.util.Collections;
 import java.util.List;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static java.util.Collections.emptyList;
@@ -10,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class WordCounterTest extends CounterTestSupport {
+public class WordCounterTest extends FizzbuzzTestSupport {
 
     @Test
     public void constructor_throwsIllegalArgumentException_nullListIsGiven() throws Exception {
