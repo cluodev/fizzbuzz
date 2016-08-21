@@ -12,7 +12,7 @@ Write some code that prints out the following for a contiguous range of numbers:
   - buzz
   - fizzbuzz
   - lucky
-  - an integer
+  - integer
 
 # System requirements
 - Java 1.7
